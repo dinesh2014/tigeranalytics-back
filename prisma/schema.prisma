@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model PriceDetails {
+  id           String   @id @default(uuid())
+  store_id     String
+  sku          String
+  product_name String
+  price        Float
+  Date         DateTime
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@unique([store_id, product_name])
+}
